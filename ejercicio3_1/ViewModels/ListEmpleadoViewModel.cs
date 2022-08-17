@@ -52,17 +52,22 @@ namespace ejercicio3_1.ViewModels
             Empleados = new ObservableCollection<Empleado>();
 
             List<Empleado> ListEmpleados = new List<Empleado>();
-            ListEmpleados = await App.DBase.obtenerListaEmpleado();
 
-            if(ListEmpleados != null)
+            try
             {
-                ListEmpleados.Reverse();
+                ListEmpleados = await App.DBase.obtenerListaEmpleado();
 
-                for (int i = 0; i < ListEmpleados.Count; i++)
+                if (ListEmpleados != null)
                 {
-                    Empleados.Add(ListEmpleados[i]);
+                    ListEmpleados.Reverse();
+
+                    for (int i = 0; i < ListEmpleados.Count; i++)
+                    {
+                        Empleados.Add(ListEmpleados[i]);
+                    }
                 }
             }
+            catch (Exception error){}
         }
 
         async Task CrearEmpleado(Type pageType)
