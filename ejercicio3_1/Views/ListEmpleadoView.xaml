@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ejercicio3_1.Views.ListEmpleadoView" 
+             xmlns:local="clr-namespace:ejercicio3_1.Views"
+             
+             xmlns:local2="clr-namespace:ejercicio3_1.Behaviors">
+
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <ScrollView>
+
+                <StackLayout Padding="25">
+
+                    <Label Text="Lista de Empleados" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                    <ListView
+                        Margin="0, 10, 0, 0"
+                    BackgroundColor="#F2F2F2"
+                    
+                    ItemsSource="{Binding Empleados}"
+                    SelectedItem="{Binding SelectedEmpleado}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+
+                                    <StackLayout Orientation="Horizontal" Padding="10">
+
+                                        <Label Text="{Binding Nombre}" TextColor="DodgerBlue" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Apellidos}" TextColor="DodgerBlue" FontAttributes="Bold"/>
+
+                                    </StackLayout>
+
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                        <ListView.Behaviors>
+                            <local2:EventToCommand/>
+                        </ListView.Behaviors>
+                    </ListView>
+
+                </StackLayout>
+
+            </ScrollView>
+
+            <Button Text="Agregar Empleado"
+                    Command="{Binding CrearEmpleadoCommand}"
+                    CommandParameter="{x:Type local:EmpleadoView}"/>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
